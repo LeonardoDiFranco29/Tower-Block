@@ -148,7 +148,7 @@ html, body {
 
 #container #high-score {
   position: absolute;
-  top: 380px; /* Ajusta según sea necesario */
+  top: 240px; /* Ajusta según sea necesario */
   width: 100%;
   text-align: center;
   font-size: 3vh;
