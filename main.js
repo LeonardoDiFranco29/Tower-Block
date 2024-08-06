@@ -197,7 +197,9 @@ var Game = /** @class */ (function () {
                 _this.onAction();
         });
         document.addEventListener('click', function (e) {
+            e.preventDefault();
             _this.onAction();
+            
         });
         document.addEventListener('touchstart', function (e) {
             e.preventDefault();
