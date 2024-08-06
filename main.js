@@ -243,7 +243,7 @@ document.addEventListener('touchstart', function (e) {
     Game.prototype.startGame = function () {
         if (this.state != this.STATES.PLAYING) {
             this.scoreContainer.innerHTML = '0';
-            document.getElementById('high-score').innerHTML = `Récord: ${getHighScore()}`;
+            document.getElementById('high-score').innerHTML = `Récord: ${getHighScore() - 1}`;
             this.updateState(this.STATES.PLAYING);
             this.addBlock();
         }
@@ -335,7 +335,7 @@ document.addEventListener('touchstart', function (e) {
     // Mostrar mensaje si se ha superado el récord
     if (currentScore > highScore) {
         saveHighScore(currentScore);
-        this.scoreContainer.innerHTML = `Nuevo Récord: ${currentScore}`;
+        this.scoreContainer.innerHTML 
     } else {
         this.scoreContainer.innerHTML = `${currentScore}`;
     }
