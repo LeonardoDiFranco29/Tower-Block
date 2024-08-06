@@ -243,6 +243,7 @@ document.addEventListener('touchstart', function (e) {
     Game.prototype.startGame = function () {
         if (this.state != this.STATES.PLAYING) {
             this.scoreContainer.innerHTML = '0';
+            document.getElementById('high-score').innerHTML = `Récord: ${getHighScore()}`;
             this.updateState(this.STATES.PLAYING);
             this.addBlock();
         }
@@ -310,9 +311,37 @@ document.addEventListener('touchstart', function (e) {
         if (this.blocks.length >= 5)
             this.instructions.classList.add('hide');
     };
+    
+    // Función para obtener el récord desde localStorage
+    function getHighScore() {
+        return localStorage.getItem('highScore') || 0;
+    }
+    
+    // Función para guardar un nuevo récord en localStorage
+    function saveHighScore(score) {
+        localStorage.setItem('highScore', score);
+    }      
+    
+    
+    
+    
+    
+    
+    // Agregar a la clase Game
     Game.prototype.endGame = function () {
-        this.updateState(this.STATES.ENDED);
-    };
+    const currentScore = this.blocks.length - 1;
+    const highScore = getHighScore();
+
+    // Mostrar mensaje si se ha superado el récord
+    if (currentScore > highScore) {
+        saveHighScore(currentScore);
+        this.scoreContainer.innerHTML = `Nuevo Récord: ${currentScore}`;
+    } else {
+        this.scoreContainer.innerHTML = `${currentScore}`;
+    }
+
+    this.updateState(this.STATES.ENDED);
+};
     Game.prototype.tick = function () {
         var _this = this;
         this.blocks[this.blocks.length - 1].tick();

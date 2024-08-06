@@ -17,7 +17,7 @@ html, body {
   top: 20px;
   width: 100%;
   text-align: center;
-  font-size: 10vh;
+  font-size: 8vh;
   -webkit-transition: -webkit-transform 0.5s ease;
   transition: -webkit-transform 0.5s ease;
   transition: transform 0.5s ease;
@@ -25,7 +25,10 @@ html, body {
   color: #333344;
   -webkit-transform: translatey(-200px) scale(1);
           transform: translatey(-200px) scale(1);
+
 }
+        
+
 #container #game {
   position: absolute;
   top: 0;
@@ -140,4 +143,13 @@ html, body {
 #container.ended .game-over p {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
+}
+
+#container #high-score {
+  position: absolute;
+  top: 380px; /* Ajusta según sea necesario */
+  width: 100%;
+  text-align: center;
+  font-size: 3vh;
+  color: #333344;
 }
