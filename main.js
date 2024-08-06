@@ -196,17 +196,27 @@ var Game = /** @class */ (function () {
             if (e.keyCode == 32)
                 _this.onAction();
         });
-        document.addEventListener('click', function (e) {
-            e.preventDefault();
-            _this.onAction();
-            
-        });
-        document.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            _this.onAction();
-            // ?? this triggers after click on android so you
-            // insta-lose, will figure it out later.
-        });
+        let lastActionTime = 0;
+const actionCooldown = 300; // tiempo en milisegundos para evitar la duplicación de eventos
+
+document.addEventListener('click', function (e) {
+    const currentTime = Date.now();
+    if (currentTime - lastActionTime > actionCooldown) {
+        e.preventDefault();
+        lastActionTime = currentTime;
+        _this.onAction();
+    }
+});
+
+document.addEventListener('touchstart', function (e) {
+    const currentTime = Date.now();
+    if (currentTime - lastActionTime > actionCooldown) {
+        e.preventDefault();
+        lastActionTime = currentTime;
+        _this.onAction();
+    }
+});
+
     }
     Game.prototype.updateState = function (newState) {
         for (var key in this.STATES)
