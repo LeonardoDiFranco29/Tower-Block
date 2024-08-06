@@ -198,10 +198,11 @@ var Game = /** @class */ (function () {
         });
         let lastActionTime = 0;
 const actionCooldown = 300; // tiempo en milisegundos para evitar la duplicación de eventos
+let isTouchDevice = false;
 
 document.addEventListener('click', function (e) {
     const currentTime = Date.now();
-    if (currentTime - lastActionTime > actionCooldown) {
+    if (!isTouchDevice && (currentTime - lastActionTime > actionCooldown)) {
         e.preventDefault();
         lastActionTime = currentTime;
         _this.onAction();
@@ -209,6 +210,7 @@ document.addEventListener('click', function (e) {
 });
 
 document.addEventListener('touchstart', function (e) {
+    isTouchDevice = true;
     const currentTime = Date.now();
     if (currentTime - lastActionTime > actionCooldown) {
         e.preventDefault();
@@ -216,6 +218,7 @@ document.addEventListener('touchstart', function (e) {
         _this.onAction();
     }
 });
+
 
     }
     Game.prototype.updateState = function (newState) {
