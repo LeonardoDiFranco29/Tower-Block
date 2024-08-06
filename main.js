@@ -192,6 +192,13 @@ var Game = /** @class */ (function () {
         this.addBlock();
         this.tick();
         this.updateState(this.STATES.READY);
+        // Cargar sonidos
+    this.sounds = [
+        new Audio('A (1).waw'),
+        new Audio('A (2).waw'),
+        // Agrega más sonidos si tienes
+    ];
+    this.currentSoundIndex = 0;
         document.addEventListener('keydown', function (e) {
             if (e.keyCode == 32)
                 _this.onAction();
@@ -275,6 +282,12 @@ document.addEventListener('touchstart', function (e) {
         var currentBlock = this.blocks[this.blocks.length - 1];
         var newBlocks = currentBlock.place();
         this.newBlocks.remove(currentBlock.mesh);
+        // Reproducir sonido si newBlocks.bonus es verdadero
+    if (newBlocks.bonus) {
+        this.sounds[this.currentSoundIndex].play();
+        this.currentSoundIndex = (this.currentSoundIndex + 1) % this.sounds.length;
+    }
+        
         if (newBlocks.placed)
             this.placedBlocks.add(newBlocks.placed);
         if (newBlocks.chopped) {
